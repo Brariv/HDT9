@@ -11,13 +11,15 @@ def txtreader(file):
             words = line.split(',')
             words = [word.replace('“', '') for word in words]
             words = [word.replace('”', '') for word in words]
+            words = [word.replace(' ', '') for word in words]   
             read.append(words)
     return read
 
 G = nx.Graph()
+print(txtreader('rutas.txt'))
 rutas = txtreader('rutas.txt')
-
-##G.add_nodes_from(rutas[0][0], rutas[0][1], rutas[0][2], rutas[0][3])
+for ruta in rutas:
+    G.add_node(ruta[0])
 for ruta in rutas:
     G.add_edge(ruta[0], ruta[1], weight=int(ruta[2]))
 
@@ -32,8 +34,6 @@ options = {
 
 nx.draw(G, with_labels=True, **options)
 plt.show()
-
-
 
 def dijkstra(graph, start):
     visited = {start: 0}
@@ -64,4 +64,4 @@ def dijkstra(graph, start):
     return visited, path
 
 
-print(txtreader('rutas.txt'))
+
