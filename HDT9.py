@@ -1,4 +1,3 @@
-
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -36,7 +35,7 @@ options = {
 nx.draw(G, with_labels=True, **options)
 plt.show()
 
-def dijkstra(graph, start):
+def dijkstra(graph, start, end):
     visited = {start: 0}
     path = {}
     nodes = set(graph.nodes)
@@ -57,12 +56,32 @@ def dijkstra(graph, start):
         current_weight = visited[min_node]
 
         for edge in graph.edges(min_node):
-            weight = current_weight + graph[min_node][edge]['weight']
+            if (min_node, edge) in graph:
+                weight = current_weight + graph[min_node][edge]['weight']
             if edge[1] not in visited or weight < visited[edge[1]]:
                 visited[edge[1]] = weight
                 path[edge[1]] = min_node
 
-    return visited, path
+        if min_node == end:
+            break
 
+    if end not in path:
+        return "No se encontro un camino."
 
+    shortest_path = []
+    node = end
+    while node != start:
+        shortest_path.append(node)
+        node = path[node]
+    shortest_path.append(start)
+    shortest_path.reverse()
+
+    return shortest_path
+
+print("Ingrese la ciudad de origen: ")
+origen = input()
+print("Ingrese la ciudad de destino: ")
+destino = input()
+
+print(dijkstra(G, origen, destino))
 
