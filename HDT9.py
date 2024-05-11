@@ -56,11 +56,13 @@ def dijkstra(graph, start, end):
         current_weight = visited[min_node]
 
         for edge in graph.edges(min_node):
+            weight = float('inf')
             if (min_node, edge) in graph:
                 weight = current_weight + graph[min_node][edge]['weight']
             if edge[1] not in visited or weight < visited[edge[1]]:
                 visited[edge[1]] = weight
                 path[edge[1]] = min_node
+
 
         if min_node == end:
             break
