@@ -24,12 +24,13 @@ for ruta in rutas:
     G.add_edge(ruta[0], ruta[1], weight=int(ruta[2]))
 
 options = {
-    "font_size": 36,
-    "node_size": 3000,
+    "font_size": 16,
+    "font_color": "grey",
+    "node_size": 1500,
     "node_color": "white",
-    "edgecolors": "black",
+    "edgecolors": "purple",
     "linewidths": 5,
-    "width": 5,
+    "width": 4,
 }
 
 nx.draw(G, with_labels=True, **options)
